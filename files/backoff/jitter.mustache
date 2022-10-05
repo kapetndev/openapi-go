@@ -1,0 +1,12 @@
+{{>partial_header}}
+package backoff
+
+import "math/rand"
+
+func addJitter(backoff, jitter float64) float64 {
+	backoff *= 1 + jitter * (rand.Float64() * 2-1)
+	if backoff < 0 {
+		return 0
+	}
+	return backoff
+}
